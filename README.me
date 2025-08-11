@@ -1,0 +1,80 @@
+Matrix Modification Example (Minesweeper-like Logic)
+Overview
+This C program creates a SIZE x SIZE matrix (grid) filled randomly with '0' and 'M' characters.
+
+'M' represents a "mine".
+
+'0' represents an empty cell.
+After generating the original matrix, the program modifies it so that each non-mine cell contains the number of mines adjacent to it (similar to Minesweeper game rules).
+
+How It Works
+Matrix Creation
+
+create_mat() allocates memory for a 2D array (char**) of size SIZE x SIZE.
+
+Randomly fills the matrix with:
+
+'M' with probability 1/5
+
+'0' otherwise.
+
+Randomness is seeded with time(NULL).
+
+Printing the Matrix
+
+print() outputs the current state of the matrix.
+
+Modification Logic
+
+modifate_matrix() loops over every cell in the matrix.
+
+Calls check_and_change() for each cell.
+
+check_and_change() Function
+
+Checks the 8 neighboring cells around a given cell (i, j).
+
+If a neighbor contains 'M', increments the value of the current cell (if it’s not a mine).
+
+Increment is done on the ASCII code of '0', turning it into '1', '2', etc.
+
+Example Output
+nginx
+Copy
+Edit
+Original Matrix >>>
+0 0 M 0 0 
+0 0 0 0 M 
+M 0 0 0 0 
+0 0 M 0 0 
+0 M 0 0 0 
+
+Modifated Matrix >>>
+1 1 M 1 1 
+1 2 2 2 M 
+M 2 2 2 1 
+1 3 M 2 1 
+1 M 1 1 0 
+File Structure
+main() – Runs the program: creates, prints, modifies, and prints again.
+
+create_mat() – Allocates and fills the initial random matrix.
+
+print() – Displays the matrix on the console.
+
+modifate_matrix() – Loops over cells to apply the transformation.
+
+check_and_change() – Checks neighbor mines and updates cell values.
+
+Compilation & Run
+bash
+Copy
+Edit
+gcc matrix.c -o matrix
+./matrix
+Notes
+SIZE is defined at the top of the file (#define SIZE 5), change this value to use a larger/smaller grid.
+
+Current implementation modifies the matrix in place, so counts may be affected if updated cells are processed before others.
+
+If you want accurate counts without interference, store updates in a temporary matrix and copy back after all calculations.
