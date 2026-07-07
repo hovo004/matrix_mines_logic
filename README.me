@@ -4,7 +4,7 @@ A simple C program that generates a random 5x5 "minefield" grid and then calcula
 
 ## How it works
 
-1. A 5x5 matrix is created and filled with random values: each cell has a chance of becoming a mine (`'M'`), otherwise it starts as `'0'`.
+1. A 5x5 matrix is created and filled with random values: each cell has a chance of becoming a mine (`M`), otherwise it starts as `0`.
 2. The original matrix is printed so you can see the raw mine placement.
 3. The program then scans every cell and, for each non-mine cell, checks all 8 surrounding neighbors. If a neighboring cell is a mine, the current cell's number is incremented.
 4. The modified matrix is printed, now showing how many mines are adjacent to each cell — just like a real Minesweeper board.
@@ -31,18 +31,18 @@ Example output:
 
 ```
 Original Matrix >>>
-0 0 M 0 0 
-0 0 0 0 M 
-0 M 0 0 0 
-0 0 0 0 0 
-M 0 0 0 0 
+0 0 M 0 0
+0 0 0 0 M
+0 M 0 0 0
+0 0 0 0 0
+M 0 0 0 0
 
 Modifated Matrix >>>
-0 1 M 1 1 
-1 2 1 2 M 
-1 M 1 1 1 
-2 1 0 0 0 
-M 1 0 0 0 
+0 1 M 1 1
+1 2 1 2 M
+1 M 1 1 1
+2 1 0 0 0
+M 1 0 0 0
 ```
 
 Each run produces a different random layout, since mine placement is seeded from the current time.
