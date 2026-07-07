@@ -1,80 +1,58 @@
-Matrix Modification Example (Minesweeper-like Logic)
-Overview
-This C program creates a SIZE x SIZE matrix (grid) filled randomly with '0' and 'M' characters.
+# matrix_mines_logic
 
-'M' represents a "mine".
+A simple C program that generates a random 5x5 "minefield" grid and then calculates, for every empty cell, how many mines surround it — the same core logic behind classic Minesweeper. Built as a hands-on exercise in 2D dynamic memory (arrays of pointers), matrix traversal, and neighbor-checking algorithms.
 
-'0' represents an empty cell.
-After generating the original matrix, the program modifies it so that each non-mine cell contains the number of mines adjacent to it (similar to Minesweeper game rules).
+## How it works
 
-How It Works
-Matrix Creation
+1. A 5x5 matrix is created and filled with random values: each cell has a chance of becoming a mine (`'M'`), otherwise it starts as `'0'`.
+2. The original matrix is printed so you can see the raw mine placement.
+3. The program then scans every cell and, for each non-mine cell, checks all 8 surrounding neighbors. If a neighboring cell is a mine, the current cell's number is incremented.
+4. The modified matrix is printed, now showing how many mines are adjacent to each cell — just like a real Minesweeper board.
 
-create_mat() allocates memory for a 2D array (char**) of size SIZE x SIZE.
+## Requirements
 
-Randomly fills the matrix with:
+- Any standard C compiler (`gcc` or similar)
 
-'M' with probability 1/5
+## Building
 
-'0' otherwise.
+```bash
+gcc matrix_mines.c -o matrix_mines
+```
 
-Randomness is seeded with time(NULL).
+## Usage
 
-Printing the Matrix
+Run the program:
 
-print() outputs the current state of the matrix.
+```bash
+./matrix_mines
+```
 
-Modification Logic
+Example output:
 
-modifate_matrix() loops over every cell in the matrix.
-
-Calls check_and_change() for each cell.
-
-check_and_change() Function
-
-Checks the 8 neighboring cells around a given cell (i, j).
-
-If a neighbor contains 'M', increments the value of the current cell (if it’s not a mine).
-
-Increment is done on the ASCII code of '0', turning it into '1', '2', etc.
-
-Example Output
-nginx
-Copy
-Edit
+```
 Original Matrix >>>
 0 0 M 0 0 
 0 0 0 0 M 
-M 0 0 0 0 
-0 0 M 0 0 
 0 M 0 0 0 
+0 0 0 0 0 
+M 0 0 0 0 
 
 Modifated Matrix >>>
-1 1 M 1 1 
-1 2 2 2 M 
-M 2 2 2 1 
-1 3 M 2 1 
-1 M 1 1 0 
-File Structure
-main() – Runs the program: creates, prints, modifies, and prints again.
+0 1 M 1 1 
+1 2 1 2 M 
+1 M 1 1 1 
+2 1 0 0 0 
+M 1 0 0 0 
+```
 
-create_mat() – Allocates and fills the initial random matrix.
+Each run produces a different random layout, since mine placement is seeded from the current time.
 
-print() – Displays the matrix on the console.
+## Why this project exists
 
-modifate_matrix() – Loops over cells to apply the transformation.
+This is a small learning exercise focused on:
 
-check_and_change() – Checks neighbor mines and updates cell values.
+- Working with dynamically allocated 2D arrays (`char**`) in C
+- Traversing a matrix and safely checking neighboring cells (including edge/corner cases)
+- Practicing clean memory management (allocation and cleanup)
 
-Compilation & Run
-bash
-Copy
-Edit
-gcc matrix.c -o matrix
-./matrix
-Notes
-SIZE is defined at the top of the file (#define SIZE 5), change this value to use a larger/smaller grid.
-
-Current implementation modifies the matrix in place, so counts may be affected if updated cells are processed before others.
-
-If you want accurate counts without interference, store updates in a temporary matrix and copy back after all calculations.
+It's a simplified look at the logic that powers the mine-counting mechanic in games like Minesweeper.
